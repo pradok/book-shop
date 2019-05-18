@@ -1,0 +1,33 @@
+{
+  "name": "book_store",
+  "version": "1.0.0",
+  "description": "Book Store",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "lint": "eslint src --color",
+    "prettier": "prettier --write 'src/**/*.js'",
+    "prettier:write": "onchange 'src/**/*.js' -- prettier --write {{changed}}",
+    "test": "jest --watchAll",
+    "coverage": "jest --coverage"
+  },
+  "author": "a",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.2",
+    "@types/node-uuid": "0.0.28",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.8"
+  }
+}
