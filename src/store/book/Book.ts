@@ -1,17 +1,15 @@
 import { BookI } from './interfaces';
+import { Product } from '../product';
 
-export class Book {
-  private _name: string;
-  private _uuid: string;
-  private _price: string;
+export default class Book extends Product {
+  private _isbn: string;
 
-  public constructor({ name, uuid, price }: BookI) {
-    this._name = name;
-    this._uuid = uuid;
-    this._price = price;
+  public constructor({ name, price, isbn }: BookI) {
+    super({ name, price });
+    this._isbn = isbn;
   }
 
-  public get price(): string {
-    return this._price;
+  public get isbn(): string {
+    return this._isbn;
   }
 }

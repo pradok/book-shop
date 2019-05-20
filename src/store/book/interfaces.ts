@@ -1,7 +1,7 @@
-export interface BookI {
-  name: string;
-  uuid: string;
-  price: string;
+import { Product } from '../product/interfaces';
+
+export interface BookI extends Product {
+  isbn: string;
 }
 
 export interface BookType {
