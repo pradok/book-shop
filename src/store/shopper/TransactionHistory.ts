@@ -1,10 +1,4 @@
-interface Transaction {
-  uuid: string;
-  price: string;
-  title: string;
-}
-
-export default class TransactionHistory {
+export default class TransactionHistory<Transaction> {
   private _history: Transaction[];
 
   public constructor() {

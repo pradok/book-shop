@@ -12,6 +12,7 @@ export default class Store {
 
   public constructor(name: string) {
     this._name = name;
+    this._users = [];
   }
 
   public set addUser(newUser: ShopperType) {
