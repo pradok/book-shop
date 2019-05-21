@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Shopper, { ProductClass } from '../Shopper';
 import { BookType } from '../../book/interfaces';
+export enum TransactionType {
+  buy = 'buy',
+  sell = 'sell'
+}
 
 describe('Shopper', () => {
   describe('instance', () => {
@@ -23,7 +27,7 @@ describe('Shopper', () => {
     it('creates default properties with added products', () => {
       expect(shopper.name).toEqual('Prad');
       expect(shopper.wallet.balance).toEqual(10000);
-      expect(shopper.transactionHistory.history).toEqual([]);
+      expect(shopper.transactionHistory.history).toEqual({ buy: [], sell: [] });
       expect(shopper.allProducts).toEqual(expectedAllProducts);
     });
 
@@ -36,8 +40,8 @@ describe('Shopper', () => {
       const remove: ProductClass = shopper.removeProduct('Test Book');
       const expected = { _name: 'Test Book', _price: 1000, _isbn: '978-3-16-13456' };
       expect(remove).toEqual(expected);
-      shopper.addToTransaction = remove;
-      const expectedTransactionHistory = [expected];
+      shopper.addToTransaction(remove, TransactionType.buy);
+      const expectedTransactionHistory = { buy: [expected], sell: [] };
       expect(shopper.transactionHistory.history).toEqual(expectedTransactionHistory);
     });
   });

@@ -3,7 +3,7 @@ import { Book } from '../book';
 import { Product } from '../product';
 import { BookType } from '../book/interfaces';
 import Wallet from './Wallet';
-import TransactionHistory from './TransactionHistory';
+import TransactionHistory, { TransactionType } from './TransactionHistory';
 
 export type ProductType = BookType;
 export type SaleProductType = Book[] | Product[];
@@ -39,8 +39,8 @@ export default class Shopper extends User {
     return remove[0];
   }
 
-  public set addToTransaction(product: Product) {
-    this.transactionHistory.add = product;
+  public addToTransaction(product: Product, type: TransactionType = TransactionType.buy): void {
+    this.transactionHistory.add(product, type);
   }
 
   public findProduct(name: string, returnIndex?: boolean): Product | number {

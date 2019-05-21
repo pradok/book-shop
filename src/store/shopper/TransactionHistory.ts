@@ -1,14 +1,25 @@
+export interface TransactionI<T> {
+  buy: T[];
+  sell: T[];
+}
+export enum TransactionType {
+  buy = 'buy',
+  sell = 'sell'
+}
 export default class TransactionHistory<Transaction> {
-  private _history: Transaction[];
+  private _history: TransactionI<Transaction>;
 
   public constructor() {
-    this._history = [];
+    this._history = {
+      buy: [],
+      sell: []
+    };
   }
-  public get history(): Transaction[] {
+  public get history(): TransactionI<Transaction> {
     return this._history;
   }
-  public set add(product: Transaction) {
-    this._history.push(product);
+  public add(product: Transaction, type: TransactionType): void {
+    this._history[type].push(product);
   }
 }
 

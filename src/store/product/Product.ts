@@ -2,7 +2,7 @@ import { Product as ProductI } from './interfaces';
 
 export default class Product {
   private _name: string;
-  private _price: string;
+  private _price: number;
 
   public constructor({ name, price }: ProductI) {
     this._name = name;
@@ -13,7 +13,7 @@ export default class Product {
     return this._name;
   }
 
-  public get price(): string {
+  public get price(): number {
     return this._price;
   }
 }
