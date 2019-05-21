@@ -8,4 +8,12 @@ export default class Wallet {
   public get balance(): number {
     return this._balance;
   }
+
+  public set debit(amount: number) {
+    this._balance -= amount;
+  }
+
+  public set credit(amount: number) {
+    this._balance += amount;
+  }
 }

@@ -30,25 +30,26 @@ export default class Shopper extends User {
     }
   }
 
-  public removeProduct(name: string): ProductClass {
+  public removeProduct(name: string): Product {
     const productIndex = this._sale.findIndex((product): boolean => product.name === name);
     if (productIndex < 0) {
-      throw new Error('Product not available');
+      throw new Error('ProductUnavailable');
     }
     const remove = this._sale.splice(productIndex, 1);
     return remove[0];
   }
 
-  public set addToTransaction(product: ProductClass) {
+  public set addToTransaction(product: Product) {
     this.transactionHistory.add = product;
   }
 
-  public findProduct(name: string, returnIndex?: boolean): Error | ProductClass | number {
+  public findProduct(name: string, returnIndex?: boolean): Product | number {
     const productIndex = this._sale.findIndex((product): boolean => product.name === name);
     if (productIndex < 0) {
-      throw new Error('Product not available');
+      throw new Error('ProductUnavailable');
     }
-    return returnIndex ? productIndex : this._sale[productIndex];
+
+    return returnIndex && typeof productIndex === 'number' ? productIndex : this._sale[productIndex];
   }
 
   public get allProducts(): SaleProductType {
