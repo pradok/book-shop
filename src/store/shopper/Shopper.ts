@@ -3,7 +3,7 @@ import { Book } from '../book';
 import { Product } from '../product';
 import { BookType } from '../book/interfaces';
 import Wallet from './Wallet';
-import TransactionHistory, { TransactionType } from './TransactionHistory';
+import Transaction, { TransactionType } from './Transaction';
 
 export type ProductType = BookType;
 export type SaleProductType = Book[] | Product[];
@@ -11,13 +11,13 @@ export type ProductClass = Book | Product;
 export default class Shopper extends User {
   public wallet: Wallet;
   private _sale: SaleProductType;
-  public transactionHistory: TransactionHistory<ProductClass>;
+  public transaction: Transaction<ProductClass>;
 
   public constructor(name: string, balance: number) {
     super(name);
     this._name = name;
     this.wallet = new Wallet(balance);
-    this.transactionHistory = new TransactionHistory<ProductClass>();
+    this.transaction = new Transaction<ProductClass>();
     this._sale = [];
   }
   public get name(): string {
@@ -40,7 +40,7 @@ export default class Shopper extends User {
   }
 
   public addToTransaction(product: Product, type: TransactionType = TransactionType.buy): void {
-    this.transactionHistory.add(product, type);
+    this.transaction.add(product, type);
   }
 
   public findProduct(name: string, returnIndex?: boolean): Product | number {

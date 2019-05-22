@@ -2,9 +2,9 @@
   "name": "book_store",
   "version": "1.0.0",
   "description": "Book Store",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "start": "tsc && node dist/index.ts",
     "lint": "eslint src --color",
     "prettier": "prettier --write 'src/**/*.js'",
     "prettier:write": "onchange 'src/**/*.js' -- prettier --write {{changed}}",

@@ -27,7 +27,7 @@ describe('Shopper', () => {
     it('creates default properties with added products', () => {
       expect(shopper.name).toEqual('Prad');
       expect(shopper.wallet.balance).toEqual(10000);
-      expect(shopper.transactionHistory.history).toEqual({ buy: [], sell: [] });
+      expect(shopper.transaction.history).toEqual({ buy: [], sell: [] });
       expect(shopper.allProducts).toEqual(expectedAllProducts);
     });
 
@@ -42,7 +42,7 @@ describe('Shopper', () => {
       expect(remove).toEqual(expected);
       shopper.addToTransaction(remove, TransactionType.buy);
       const expectedTransactionHistory = { buy: [expected], sell: [] };
-      expect(shopper.transactionHistory.history).toEqual(expectedTransactionHistory);
+      expect(shopper.transaction.history).toEqual(expectedTransactionHistory);
     });
   });
 });

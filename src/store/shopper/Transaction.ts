@@ -6,8 +6,8 @@ export enum TransactionType {
   buy = 'buy',
   sell = 'sell'
 }
-export default class TransactionHistory<Transaction> {
-  private _history: TransactionI<Transaction>;
+export default class Transaction<T> {
+  private _history: TransactionI<T>;
 
   public constructor() {
     this._history = {
@@ -15,12 +15,10 @@ export default class TransactionHistory<Transaction> {
       sell: []
     };
   }
-  public get history(): TransactionI<Transaction> {
+  public get history(): TransactionI<T> {
     return this._history;
   }
-  public add(product: Transaction, type: TransactionType): void {
+  public add(product: T, type: TransactionType): void {
     this._history[type].push(product);
   }
 }
-
-module.exports = TransactionHistory;

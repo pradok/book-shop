@@ -60,7 +60,7 @@ describe('Kelly buys book from Bob', () => {
   };
   const userKelly: ShopperType = {
     type: 'shopper',
-    user: { name: 'Kelly', balance: 10000, products: [] }
+    user: { name: 'Kelly', balance: 10000 }
   };
   let shopperBob: Shopper | void;
   let shopperKelly: Shopper | void;
@@ -71,26 +71,33 @@ describe('Kelly buys book from Bob', () => {
   });
 
   it('Unsuccessful', () => {
-    const buy = store.buyProduct('Kelly', 'CrazyTown', 'Book', 'Bob', 'Shopper', 700);
+    const buy = store.buyProduct('Kelly', 700, 'CrazyTown', 'Book', 'Bob', 'Shopper');
+    // Kelly should have a unsuccessful transaction
     expect(buy).toEqual(false);
   });
 
   it('Successful Transaction', () => {
-    const buy = store.buyProduct('Kelly', 'CrazyTown', 'Book', 'Bob', 'Shopper', 1000);
+    const buy = store.buyProduct('Kelly', 1000, 'CrazyTown', 'Book', 'Bob', 'Shopper');
     const productTrans = {
       _isbn: '977-098-980790',
       _name: 'CrazyTown',
       _price: 1000
     };
+    // Kelly should have a successful transaction
     expect(buy).toEqual(true);
     expect(shopperBob instanceof Shopper).toEqual(true);
     expect(shopperKelly instanceof Shopper).toEqual(true);
     if (shopperBob && shopperKelly && buy) {
+      // Bob's wallet balance should go up $1100
       expect(shopperBob.wallet.balance).toEqual(11000);
+      // Kelly's wallet balance should go down to $9
       expect(shopperKelly.wallet.balance).toEqual(9000);
+      // Bob has no more products to sell
       expect(shopperBob.allProducts).toEqual([]);
-      expect(shopperBob.transactionHistory.history).toEqual({ buy: [], sell: [productTrans] });
-      expect(shopperKelly.transactionHistory.history).toEqual({ buy: [productTrans], sell: [] });
+      // Bob should have his sale transaction under sell
+      expect(shopperBob.transaction.history).toEqual({ buy: [], sell: [productTrans] });
+      // Kelly should have her sale transaction under buy
+      expect(shopperKelly.transaction.history).toEqual({ buy: [productTrans], sell: [] });
     }
   });
 });

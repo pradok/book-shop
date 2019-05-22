@@ -8,7 +8,7 @@ enum TransactionType {
 
 export interface ShopperType {
   type: 'shopper';
-  user: { name: string; balance: number; products: BookType[] };
+  user: { name: string; balance: number; products?: BookType[] };
 }
 
 export default class Store {
@@ -26,8 +26,10 @@ export default class Store {
         user: { name, balance, products }
       } = newUser;
       const user = new Shopper(name, balance);
-      for (const product of products) {
-        user.addProduct = product;
+      if (products && products.length) {
+        for (const product of products) {
+          user.addProduct = product;
+        }
       }
       this._users.push(user);
       return user;
@@ -44,23 +46,23 @@ export default class Store {
 
   public buyProduct(
     buyerName: string,
+    buyerPrice: number,
     productName: string,
     productType: string,
-    userName: string,
-    userType: string,
-    price: number
+    sellerName: string,
+    sellerType: string
   ): boolean {
-    const shopperSeller = this.findShopper(userName, userType);
-    const shopperBuyer = this.findShopper(buyerName, userType);
+    const shopperSeller = this.findShopper(sellerName, sellerType);
+    const shopperBuyer = this.findShopper(buyerName, sellerType);
     if (shopperSeller && shopperBuyer) {
       const product: Product | number = shopperSeller.findProduct(productName);
       if (product && typeof product !== 'number' && product.constructor.name === productType) {
-        if (product.price === price) {
+        if (product.price === buyerPrice) {
           shopperSeller.removeProduct(product.name);
           shopperSeller.addToTransaction(product, TransactionType.sell);
-          shopperSeller.wallet.credit = price;
+          shopperSeller.wallet.credit = buyerPrice;
           shopperBuyer.addToTransaction(product, TransactionType.buy);
-          shopperBuyer.wallet.debit = price;
+          shopperBuyer.wallet.debit = buyerPrice;
           return true;
         }
       }
