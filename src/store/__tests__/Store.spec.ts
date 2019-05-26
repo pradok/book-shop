@@ -88,9 +88,9 @@ describe('Kelly buys book from Bob', () => {
     expect(shopperBob instanceof Shopper).toEqual(true);
     expect(shopperKelly instanceof Shopper).toEqual(true);
     if (shopperBob && shopperKelly && buy) {
-      // Bob's wallet balance should go up $1100
+      // Bob's wallet balance should go up $110
       expect(shopperBob.wallet.balance).toEqual(11000);
-      // Kelly's wallet balance should go down to $9
+      // Kelly's wallet balance should go down to $90
       expect(shopperKelly.wallet.balance).toEqual(9000);
       // Bob has no more products to sell
       expect(shopperBob.allProducts).toEqual([]);
